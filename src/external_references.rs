@@ -26,6 +26,14 @@ pub union ExternalReference<'s> {
   pub pointer: *mut c_void,
 }
 
+impl<'s> std::fmt::Debug for ExternalReference<'s> {
+  fn fmt(&self, fmt: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    // Since the compiler doesn't keep track of which variant is being used
+    // we have nothing to match against.
+    fmt.debug_struct("ExternalReference").finish()
+  }
+}
+
 #[derive(Debug, Clone)]
 pub struct ExternalReferences {
   null_terminated: Vec<intptr_t>,
